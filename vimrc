@@ -1,25 +1,8 @@
-
 call pathogen#infect()
 
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Comments handling
-" Bundle 'tomtom/tcomment_vim'
-
-" Autocomplete for Python
-if has('python')
-  Bundle 'davidhalter/jedi-vim'
-endif
-
-" if has('python')
-"   Bundle 'nvie/vim-flake8'
-" endif
-
-autocmd BufWritePost *.py call Flake8()
 
 filetype plugin indent on  " required
 
@@ -59,8 +42,6 @@ set smartindent
 
 " Copy indentation of current line when starting a new line
  set autoindent
-"
-"
 
 " Enable highlighting search results
 set hlsearch
@@ -104,10 +85,11 @@ endfunction
 autocmd WinEnter,CursorMoved * call ToggleHighlight()
 autocmd WinLeave * 2match IncSearch //
 
+" Start with automatic highlighting of current word disabled
+call ToggleHighlight(1)
+
 " F9: Toggle highlighting all matches of current word
 map <F9> :call ToggleHighlight(1)<CR>
-let g:SuperTabDefaultCompletionType = "context"
-let g:jedi#popup_on_dot = 0
 
 " Allow command completion
 set wildmenu
@@ -124,18 +106,20 @@ let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
 
-" Set supertab to navigate from top to bottom
-let g:SuperTabDefaultCompletionType = '<c-n>'
-let g:SuperTabContextDefaultCompletionType = '<c-n>'
-"
-" " Prevent autocompletion after several characters
-let g:SuperTabNoCompleteAfter = ['^', ',', ':', "'", '"', ')', '\s']
-"
-" " Avoid popping up after dot
-let g:jedi#popup_on_dot = 0
-"
-" " Avoid selecting the first item in the completion menu by default
-let g:jedi#popup_select_first = 0
-"
-" " Avoid opening up the preview window
+" Avoid opening up the preview window
 autocmd FileType python setlocal completeopt-=preview
+
+" Remap leader key
+let mapleader = ','
+
+""" NAVIGATION
+" Open and source vimrc easily
+nnoremap <leader>v :e ~/tmp/frajamomo_dotfiles/vimrc<CR>
+nnoremap <leader>s :source ~/tmp/frajamomo_dotfiles/vimrc<CR>
+
+" Press Space to turn off highlighting and clear any message already
+" displayed.
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" Call flake8 when saving python files
+" autocmd BufWritePost *.py call Flake8()
