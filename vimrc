@@ -4,6 +4,19 @@ set nocompatible
 filetype off
 
 
+" remap <leader> to ',' key
+let mapleader = ","
+
+" easy handling of split windows
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" strip all trailing whitespace in the current file with <leader>W
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
 filetype plugin indent on  " required
 
 " Enable syntax highlighting
@@ -45,9 +58,13 @@ set smartindent
 
 " Enable highlighting search results
 set hlsearch
+set incsearch
+set showmatch
 
 " Ignore case in search patterns
 set ignorecase
+set smartcase
+nnoremap <leader><space> :noh<cr>
 
 " Highlight trailing whitespaces
 highlight Error ctermbg=red ctermfg=white guibg=red guifg=white
@@ -101,25 +118,18 @@ cmap w!! w !sudo tee > /dev/null %
 """ COLORS AND LOOK'N'FEEL
 " Set colorscheme
 set t_Co=256
-set background=dark
 let g:molokai_original = 1
+set background=dark
 let g:rehash256 = 1
 colorscheme molokai
 
 " Avoid opening up the preview window
 autocmd FileType python setlocal completeopt-=preview
 
-" Remap leader key
-let mapleader = ','
-
-""" NAVIGATION
-" Open and source vimrc easily
-nnoremap <leader>v :e ~/tmp/frajamomo_dotfiles/vimrc<CR>
-nnoremap <leader>s :source ~/tmp/frajamomo_dotfiles/vimrc<CR>
-
-" Press Space to turn off highlighting and clear any message already
-" displayed.
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" Call flake8 when saving python files
-" autocmd BufWritePost *.py call Flake8()
+" shortcuts for git
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gD :diffoff!<CR><c-w>o<CR> " switch back to current file and closes fugitive buffer
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
+" nnoremap <leader>gw :!git add . && git commit -m 'WIP' && git push<CR>
