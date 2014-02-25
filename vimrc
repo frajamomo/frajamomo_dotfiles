@@ -3,7 +3,6 @@ call pathogen#infect()
 set nocompatible
 filetype off
 
-
 " remap <leader> to ',' key
 let mapleader = ","
 
@@ -133,3 +132,9 @@ nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
 " nnoremap <leader>gw :!git add . && git commit -m 'WIP' && git push<CR>
+
+" Avoid popping up after dot
+let g:jedi#popup_on_dot = 0
+"
+" " Avoid selecting the first item in the completion menu by default
+let g:jedi#popup_select_first = 0
