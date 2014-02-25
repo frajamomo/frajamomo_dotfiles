@@ -135,6 +135,8 @@ nnoremap <leader>gc :Gcommit<CR>
 
 " Avoid popping up after dot
 let g:jedi#popup_on_dot = 0
-"
-" " Avoid selecting the first item in the completion menu by default
+
+" Avoid selecting the first item in the completion menu by default
 let g:jedi#popup_select_first = 0
+
+nmap <F8> :TagbarToggle<CR>
