@@ -143,3 +143,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " Remove all trailing whitespaces when saving python files
 autocmd FileType python autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" PEP8 configuration
+let g:flake8_max_line_length=120
+let g:flake8_ignore='W391' " Blank line at end of file
