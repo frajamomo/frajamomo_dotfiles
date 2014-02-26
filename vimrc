@@ -140,3 +140,6 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 
 nmap <F8> :TagbarToggle<CR>
+
+" Remove all trailing whitespaces when saving python files
+autocmd FileType python autocmd BufWritePre <buffer> :%s/\s\+$//e
