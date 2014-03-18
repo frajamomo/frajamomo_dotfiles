@@ -147,3 +147,9 @@ autocmd FileType python autocmd BufWritePre <buffer> :%s/\s\+$//e
 " PEP8 configuration
 let g:flake8_max_line_length=120
 let g:flake8_ignore='W391' " Blank line at end of file
+
+" F2: Toggle paste mode to avoid screwing indentation
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
