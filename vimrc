@@ -152,4 +152,5 @@ let g:flake8_ignore='W391' " Blank line at end of file
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
+set scrolloff=5
 
