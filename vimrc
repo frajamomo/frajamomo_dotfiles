@@ -1,4 +1,25 @@
-call pathogen#infect()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+
+" Molokai colorscheme
+Bundle 'tomasr/molokai'
+
+" Comments handling
+Bundle 'tomtom/tcomment_vim'
+
+" Show differences from git repository
+if version >= 703
+  Bundle 'airblade/vim-gitgutter'
+endif
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 set nocompatible
 filetype off
@@ -28,6 +49,10 @@ if version >= 704
   set relativenumber
 endif
 
+if version >= 703
+	set colorcolumn=80
+endif
+
 " Show ruler
 set ruler
 
@@ -37,9 +62,6 @@ set tabstop=2
 " Number of spaces for each step of autoindent
 set shiftwidth=2
 
-if version >= 703
-	set colorcolumn=79
-endif
 
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
 autocmd FileType sh setlocal shiftwidth=4 tabstop=4
@@ -74,38 +96,8 @@ autocmd InsertEnter * match Error /\s\+\%#\@<!$/
 autocmd InsertLeave * match Error /\s\+$/
 autocmd WinLeave,BufWinLeave * match Error //
 
-
-augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
-
 " Better highlighting of matching brackets and parenthesis
 highlight MatchParen cterm=none ctermbg=250 ctermfg=235 gui=none guibg=250 guifg=235
-
-let g:toggleHighlight = 0
-function! ToggleHighlight(...)
-  if a:0 == 1 " Toggle behaviour
-    let g:toggleHighlight = 1 - g:toggleHighlight
-  endif
-
-  if g:toggleHighlight == 0 " Normal action, highlight
-    silent! exe printf('2match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-  else
-    " Clear the matches
-    silent! exe printf('2match IncSearch //', escape(expand('<cword>'), '/\'))
-  endif
-endfunction
-
-autocmd WinEnter,CursorMoved * call ToggleHighlight()
-autocmd WinLeave * 2match IncSearch //
-
-" Start with automatic highlighting of current word disabled
-call ToggleHighlight(1)
-
-" F9: Toggle highlighting all matches of current word
-map <F9> :call ToggleHighlight(1)<CR>
 
 " Allow command completion
 set wildmenu
@@ -122,27 +114,27 @@ set background=dark
 let g:rehash256 = 1
 colorscheme molokai
 
+" <CR> highlights all occurences of the current word without moving
+noremap <CR> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+
 " Avoid opening up the preview window
 autocmd FileType python setlocal completeopt-=preview
 
 " shortcuts for git
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gD :diffoff!<CR><c-w>o<CR> " switch back to current file and closes fugitive buffer
+nnoremap <leader>gD :diffoff!<CR><c-w>o<CR> " switch back to current file
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit<CR>
+" nnoremap <leader>gc :Gcommit<CR>
+" nnoremap <leader>gp :Git push<CR>
 " nnoremap <leader>gw :!git add . && git commit -m 'WIP' && git push<CR>
-
-" Avoid popping up after dot
-let g:jedi#popup_on_dot = 0
-
-" Avoid selecting the first item in the completion menu by default
-let g:jedi#popup_select_first = 0
-
-nmap <F8> :TagbarToggle<CR>
 
 " Remove all trailing whitespaces when saving python files
 autocmd FileType python autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" Open and source vimrc easily
+nnoremap <leader>c :e ~/.vimrc<CR>
+nnoremap <leader>s :source ~/.vimrc<CR>
 
 " PEP8 configuration
 let g:flake8_max_line_length=120
