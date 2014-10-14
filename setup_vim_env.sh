@@ -1,3 +1,5 @@
+# OBSOLETE !!!
+
 #!/bin/bash
 
 if [ -f ~/.vimrc ]; then
