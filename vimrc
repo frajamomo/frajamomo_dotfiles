@@ -7,11 +7,11 @@ Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
-" Molokai colorscheme
-Bundle 'tomasr/molokai'
-
 " Comments handling
 Bundle 'tomtom/tcomment_vim'
+
+" Airline
+Plugin 'bling/vim-airline'
 
 " Show differences from git repository
 if version >= 703
@@ -45,9 +45,9 @@ syntax on
 " Enable UTF-8 encoding
 set encoding=utf-8
 
-if version >= 704
-  set relativenumber
-endif
+" if version >= 704
+"   set relativenumber
+" endif
 
 if version >= 703
 	set colorcolumn=80
@@ -108,11 +108,13 @@ cmap w!! w !sudo tee > /dev/null %
 
 """ COLORS AND LOOK'N'FEEL
 " Set colorscheme
-set t_Co=256
 let g:molokai_original = 1
-set background=dark
 let g:rehash256 = 1
+set t_Co=256
+set background=dark
 colorscheme molokai
+" highlight Normal ctermbg=NONE
+" highlight nonText ctermbg=NONE
 
 " <CR> highlights all occurences of the current word without moving
 noremap <CR> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -145,5 +147,25 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 set scrolloff=5
-set number
+" set number
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+set statusline=%F%m%r%h%w\
+set statusline+=%{fugitive#statusline()}\
+set statusline+=[%{strlen(&fenc)?&fenc:&enc}]
+set statusline+=\ [line\ %l\/%L]
+set statusline+=%{rvm#statusline()}
+
+set laststatus=2
+
+:nnoremap <F5> :buffers<CR>:buffer<Space>
+set wildchar=<Tab> wildmenu wildmode=full
+set wildcharm=<C-Z>
+nnoremap <F10> :b <C-Z>
+
+set title
