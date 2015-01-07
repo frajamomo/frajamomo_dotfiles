@@ -45,12 +45,12 @@ syntax on
 " Enable UTF-8 encoding
 set encoding=utf-8
 
-" if version >= 704
-"   set relativenumber
-" endif
+"if version >= 704
+"  set relativenumber
+"endif
 
 if version >= 703
-	set colorcolumn=80
+	set colorcolumn=120
 endif
 
 " Show ruler
@@ -147,13 +147,15 @@ nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
 set scrolloff=5
-" set number
+"set number
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 "
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+set background=dark
 
 set statusline=%F%m%r%h%w\
 set statusline+=%{fugitive#statusline()}\
@@ -162,10 +164,3 @@ set statusline+=\ [line\ %l\/%L]
 set statusline+=%{rvm#statusline()}
 
 set laststatus=2
-
-:nnoremap <F5> :buffers<CR>:buffer<Space>
-set wildchar=<Tab> wildmenu wildmode=full
-set wildcharm=<C-Z>
-nnoremap <F10> :b <C-Z>
-
-set title
