@@ -1,0 +1,6 @@
+# This files placed in the /etc folder configure the autofs service, in works by mounting the /mnt/synology_[video|music|temp]
+# folder only when they are acceded.
+
+sudo apt-get install autofs5
+
+

@@ -1,0 +1,3 @@
+synology_video -fstype=nfs,rw,soft,intr,rsize=8192,wsize=8192 synology:/volume1/video
+synology_music -fstype=nfs,rw,soft,intr,rsize=8192,wsize=8192 synology:/volume1/music
+synology_temp  -fstype=nfs,rw,soft,intr,rsize=8192,wsize=8192 synology:/volume1/Temp
