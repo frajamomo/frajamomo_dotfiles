@@ -1,0 +1,11 @@
+The mpd.conf file configures the mpd service to play music in the Raspberry Pi
+All files are moved to /home/javier/.mpd folder and the user running mpd is 
+changed to "javier", The service is automatilly started at boot time if the 
+following command is issued:
+
+sudo update-rc.d mpd enable
+
+The music folder is pointing to /mnt/synology_music, which is mounted when acceded
+by the autofs utility.
+
+
