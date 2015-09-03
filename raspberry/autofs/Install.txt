@@ -1,6 +1,8 @@
 # This files placed in the /etc folder configure the autofs service, in works by mounting the /mnt/synology_[video|music|temp]
 # folder only when they are acceded.
+# Nothing to be configured in the /etc/fstab
 
 sudo apt-get install autofs5
+sudo apt-get install nfs-common
 
-
+# (20150903) Worked in the raspberry B y en las Raspberry Pi con OSMC (Kodi)
