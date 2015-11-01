@@ -75,7 +75,7 @@ set expandtab
 set smartindent
 
 " Copy indentation of current line when starting a new line
- set autoindent
+set autoindent
 
 " Enable highlighting search results
 set hlsearch
@@ -138,6 +138,10 @@ autocmd FileType python autocmd BufWritePre <buffer> :%s/\s\+$//e
 nnoremap <leader>c :e ~/.vimrc<CR>
 nnoremap <leader>s :source ~/.vimrc<CR>
 
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+" set hidden
+
 " PEP8 configuration
 let g:flake8_max_line_length=120
 let g:flake8_ignore='W391' " Blank line at end of file
@@ -154,6 +158,16 @@ let g:airline#extensions#tabline#enabled = 1
 "
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
 
 set background=dark
 
