@@ -1,0 +1,9 @@
+Host silencio
+    HostName silencio
+    User javier
+    ServerAliveInterval 30
+    ServerAliveCountMax 120
+
+Host github.com
+    User frajamomo@hotmail.com
+    IdentityFile ~/.ssh/id_dsa.pub
