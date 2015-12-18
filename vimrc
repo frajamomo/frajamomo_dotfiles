@@ -100,8 +100,8 @@ autocmd WinLeave,BufWinLeave * match Error //
 highlight MatchParen cterm=none ctermbg=250 ctermfg=235 gui=none guibg=250 guifg=235
 
 " Allow command completion
+set wildmode=longest,list,full
 set wildmenu
-set wildmode=list:full
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
