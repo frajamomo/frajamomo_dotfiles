@@ -119,3 +119,8 @@ LD_LIBRARY_PATH=${STEAMLIBS}
 export STEAMLIBS
 export LD_LIBRARY_PATH
 source ~/.gitps1.sh
+
+
+sc() {
+    grep ^[^#] $1
+}
